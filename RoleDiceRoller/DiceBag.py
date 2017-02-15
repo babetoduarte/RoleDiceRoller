@@ -22,12 +22,12 @@ class DiceBag:
             self.diceList.append(die)
 
     def remove_die(self, sides):
-        if self.die_in_bag(sides) == True:
+        if self.die_in_bag(sides):
             self.diceList = [die for die in self.diceList if die.get_sides() != sides]
 
     def roll_dice(self, ammount, sides):
         result = []
-        if self.die_in_bag(sides) == True:
+        if self.die_in_bag(sides):
             rolling = self.find_dice(sides)
             for i in range(ammount):
                 result.append(rolling.roll())
