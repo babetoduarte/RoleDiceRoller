@@ -1,7 +1,10 @@
 from RoleDiceRoller.DiceBag import DiceBag
+import hug
 
 db = DiceBag()
 
+@hug.get()
+@hug.cli()
 def roll(ndice):
     extra = 0
     info1 = ndice.split('d')
@@ -23,15 +26,21 @@ def roll(ndice):
     if extra > 0:
         print("Rolling "+str(amount)+"d"+str(sides) + "+" + str(extra) + ":")
         print(str(roll_results) + "+" + str(extra) + "=" + str(roll_sum + extra))
+        return(str(roll_results) + "+" + str(extra) + "=" + str(roll_sum + extra))
     elif extra < 0:
         print("Rolling " + str(amount) + "d" + str(sides) + str(extra) + ":")
-        print(str(roll_results) + str(extra) + "=" + str(roll_sum + extra))
+        print (str(roll_results) + str(extra) + "=" + str(roll_sum + extra))
+        return(str(roll_results) + str(extra) + "=" + str(roll_sum + extra))
     else:
         print("Rolling " + str(amount) + "d" + str(sides) + ":")
         print(str(roll_results) + "=" + str(roll_sum))
+        return(str(roll_results) + "=" + str(roll_sum))
 
 
-roll('5d6')
-roll('2d20')
-roll('5d7+3')
-roll('3d8-2')
+if __name__ == '__main__':
+    roll.interface.cli()
+
+#roll('5d6')
+#roll('2d20')
+#roll('5d7+3')
+#roll('3d8-2')
